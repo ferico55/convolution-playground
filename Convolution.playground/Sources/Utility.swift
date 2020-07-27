@@ -21,9 +21,13 @@ public func A(_ x: UInt32) -> UInt32 {
 }
 
 public func RGBMake(r: UInt32, g: UInt32, b: UInt32) -> UInt32 {
-    return (r | (g << 8) | (b << 16) | (0x00 << 24))
+    return (r | (g << 8) | (b << 16) | (0xFF << 24))
 }
 
 public func RGBAMake(r: UInt32, g: UInt32, b: UInt32, a: UInt32) -> UInt32 {
     return (r | (g << 8) | (b << 16) | (a << 24))
+}
+
+public func GrayMake(_ x: UInt32) -> UInt32 {
+    return (x | (x << 8) | (x << 16) | (0xFF << 24))
 }

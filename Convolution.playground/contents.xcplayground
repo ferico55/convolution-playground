@@ -3,6 +3,8 @@
     <pages>
         <page name='1. Handling Image'/>
         <page name='2. Grayscale'/>
-        <page name='3. Median Convolution'/>
+        <page name='3. Average Convolution'/>
+        <page name='4. Optimized Average Convolution'/>
+        <page name='5. Let&apos;s Play With Kernels'/>
     </pages>
 </playground>

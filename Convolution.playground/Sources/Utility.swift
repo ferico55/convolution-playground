@@ -71,8 +71,6 @@ public func convolution(_ imageData: inout UnsafeMutablePointer<UInt32>, kernelS
     for i in 0 ..< width * height {
         imageData[i] = result[i]
     }
-    
-//    return result
 }
 
 func processKernel(_ kernel: [Double], imageChunk: [UInt32]) -> UInt32 {

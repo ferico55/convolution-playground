@@ -18,17 +18,6 @@ let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premult
 let context = CGContext(data: imageData, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo)
 context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
 
-// traditional way
-for i in 0 ..< height {
-    for j in 0 ..< width {
-        let pixelOffset = i * width + j
-        let pixel = imageData[pixelOffset]
-        
-        let average = (R(pixel) + G(pixel) + B(pixel)) / 3
-        imageData[pixelOffset] = RGBMake(r: average, g: average, b: average)
-    }
-}
-
 if let resultedCGImage = context?.makeImage() {
     let image = UIImage(cgImage: resultedCGImage)
 }

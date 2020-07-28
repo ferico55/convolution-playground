@@ -84,7 +84,7 @@ let sobelVerticalEdgeDetection: [Double] = [
 
 toGrayscale(from: &imageData, width: width, height: height)
 let resultedCGImage = context?.makeImage()
-convolution(&imageData, kernelSize: 5, width: width, height: height, kernel: gaussianBlurKernel5)
+convolution(&imageData, kernelSize: 5, width: width, height: height, kernel: averageKernel)
 
 if let resultedCGImage = context?.makeImage() {
     let image = UIImage(cgImage: resultedCGImage)

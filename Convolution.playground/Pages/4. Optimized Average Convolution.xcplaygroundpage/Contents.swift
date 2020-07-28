@@ -26,8 +26,44 @@ let averageKernel: [Double] = [
     0.11, 0.11, 0.11
 ]
 
-toGrayscale(from: &imageData, width: width, height: height)
-convolution(&imageData, kernelSize: 3, width: width, height: height, kernel: averageKernel)
+for i in 0 ..< height {
+    for j in 0 ..< width {
+        let pixelOffset = i * width + j
+        let pixel = imageData[pixelOffset]
+        
+        let average = (R(pixel) + G(pixel) + B(pixel)) / 3
+        imageData[pixelOffset] = RGBMake(r: average, g: average, b: average)
+    }
+}
+
+func processKernel(_ kernel: [Double], imageChunk: [UInt32]) -> UInt32 {
+    let result = imageChunk
+        .map { R($0) }
+        .enumerated()
+        .map { (index, pixel) in
+            Int32(Double(pixel) * kernel[index])
+        }.reduce(0) { $0 + $1 }
+
+    let normalizedResult: UInt32 = UInt32(min(max(0, result), 255))
+    return GrayMake(normalizedResult)
+}
+
+for row in startingPixel ..< height - startingPixel {
+    for column in startingPixel ..< width - startingPixel {
+        var window: [UInt32] = []
+        window.reserveCapacity(kernelSize * kernelSize)
+
+        for i in -startingPixel ... startingPixel {
+            for j in -startingPixel ... startingPixel {
+                let pixelOffset = ((row + i) * width) + (column + j)
+                window.append(imageData[pixelOffset])
+            }
+        }
+        
+        let offset = row * width + column
+        imageData[offset] = processKernel(averageKernel, imageChunk: window)
+    }
+}
 
 if let resultedCGImage = context?.makeImage() {
     let image = UIImage(cgImage: resultedCGImage)

@@ -2,7 +2,7 @@
 
 import UIKit
 
-let image = UIImage(named: "lenna.png")!
+let image = UIImage(named: "smallBanner.jpeg")!
 let cgImage = image.cgImage!
 
 let width = Int(image.size.width)
@@ -84,7 +84,7 @@ let sobelVerticalEdgeDetection: [Double] = [
 
 toGrayscale(from: &imageData, width: width, height: height)
 let resultedCGImage = context?.makeImage()
-convolution(&imageData, kernelSize: 5, width: width, height: height, kernel: averageKernel)
+convolution(&imageData, kernelSize: 3, width: width, height: height, kernel: averageKernel)
 
 if let resultedCGImage = context?.makeImage() {
     let image = UIImage(cgImage: resultedCGImage)

@@ -1,6 +1,6 @@
 import UIKit
 
-let image = UIImage(named: "lenna.png")!
+let image = UIImage(named: "lenna.png")! // 512x512
 let cgImage = image.cgImage!
 
 let width = Int(image.size.width)
